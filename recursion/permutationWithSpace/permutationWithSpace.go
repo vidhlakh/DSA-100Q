@@ -33,7 +33,7 @@ func permutationWithSpace(input string, res *[]string, index, N int, curr string
 	//with space
 
 	fmt.Printf("b4-space,index:%d,input:%s,res:%v\n", index, input, *res)
-	permutationWithSpace(input[:index]+"/"+input[index+1:], res, index+1, N)
+	permutationWithSpace(input, res, index+1, N, fmt.Sprintf(""))
 	fmt.Printf("after-space,index:%d,input:%s,res: %v\n", index, input, *res)
 	//}
 }
