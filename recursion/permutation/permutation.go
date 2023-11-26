@@ -6,7 +6,7 @@ import (
 
 func main() {
 	fmt.Println("Reverse a stringPossible permutations for a string")
-	input := "ABC"
+	input := "123"
 	var res []string
 	N := len(input)
 	permutation(input, &res, 0, N)

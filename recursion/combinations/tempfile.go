@@ -1,3 +1,4 @@
+
 func combineMethod2(n, k int) [][]int {
 	var res [][]int
 	curr := utils.NewStack()
