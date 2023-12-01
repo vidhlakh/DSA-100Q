@@ -52,20 +52,25 @@ func combineMethod2(n, k int) [][]int {
 }
 
 func helperMethod2(i, n, k int, res *[][]int, curr []int) {
-
-	if len(curr) == k {
-
-		*res = append(*res, curr)
-		fmt.Println("res", *res)
+	if k == 0 {
+		tempSeq := make([]int, len(curr))
+		copy(tempSeq, curr)          // copy subSeq to tempSeq
+		*res = append(*res, tempSeq) //append tempSeq to out
 		return
 	}
+	// if len(curr) == k {
+
+	// 	*res = append(*res, curr)
+	// 	fmt.Println("res", *res)
+	// 	return
+	// }
 	if i > n {
 		return
 	}
 
 	// pick
 	curr = append(curr, i)
-	helperMethod2(i+1, n, k, res, curr)
+	helperMethod2(i+1, n, k-1, res, curr)
 	curr = curr[:len(curr)-1]
 
 	// dont pick
