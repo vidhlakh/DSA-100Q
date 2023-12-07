@@ -56,6 +56,7 @@ func helperMethod2(i, n, k int, res *[][]int, curr []int) {
 		tempSeq := make([]int, len(curr))
 		copy(tempSeq, curr)          // copy subSeq to tempSeq
 		*res = append(*res, tempSeq) //append tempSeq to out
+		fmt.Printf("res:%v,%p,%v,%p,temp:%p\n", *res, res, curr, curr, tempSeq)
 		return
 	}
 	// if len(curr) == k {
