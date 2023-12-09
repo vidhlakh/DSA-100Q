@@ -17,7 +17,7 @@ func generateParenthesesM1(n int) []string {
 	return res
 }
 
-// Bottom up 0 to n approach
+//  0 to n approach
 func helperM1(n, open, closed int, res *[]string, curr string) {
 	if closed == n {
 		*res = append(*res, curr)

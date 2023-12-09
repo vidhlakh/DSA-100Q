@@ -54,3 +54,33 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+// memoize
+func robMemoize(nums []int) int {
+	n := len(nums)
+	if n == 1 {
+		return nums[0]
+	}
+	dp := make([]int, n)
+	for i := 0; i < n; i++ {
+		dp[i] = -1
+	}
+	return max(memoize(n-1, nums, dp), memoize(n-2, nums, dp))
+}
+
+func memoize(ind int, nums, dp []int) int {
+
+	if ind < 0 {
+		return 0
+	}
+	if dp[ind] != -1 {
+		return dp[ind]
+	}
+
+	// rob
+	rob := nums[ind] + memoize(ind-2, nums, dp)
+	//dontrob
+	dontrob := memoize(ind-1, nums, dp)
+	dp[ind] = max(rob, dontrob)
+	return dp[ind]
+}
