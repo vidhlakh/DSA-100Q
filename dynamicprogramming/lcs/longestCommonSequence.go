@@ -4,8 +4,8 @@ import "fmt"
 
 // https://leetcode.com/problems/longest-common-subsequence/
 func main() {
-	text1 := "abcba"
-	text2 := "abcbcba"
+	text1 := "sea"
+	text2 := ""
 	fmt.Printf("Recursion:: LCS of %s,%s is %d\n", text1, text2, lcsRecursion(text1, text2))
 
 	// Memoization
@@ -16,6 +16,7 @@ func main() {
 	// Space Optimization
 	fmt.Printf("Space Optimization::LCS of %s,%s is %d\n", text1, text2, lcsSpaceOptimization(text1, text2))
 
+	fmt.Println("Min delelte sum:", minimumDeleteSum(text1, text2))
 }
 
 // Recursion Time : O(2^n+m) Space: O(n+m)+ recursive stack
@@ -136,4 +137,45 @@ func lcsSpaceOptimization(text1, text2 string) int {
 		prev = temp
 	}
 	return curr[m]
+}
+
+func minimumDeleteSum(s1 string, s2 string) int {
+
+	n := len(s1)
+	m := len(s2)
+	dp := make([][]int, n)
+	for i := 0; i < n; i++ {
+		dp[i] = make([]int, m)
+		for j := 0; j < m; j++ {
+			dp[i][j] = -1
+		}
+	}
+	var res int
+	for i := 0; i < n; i++ {
+		res = int(s1[i])
+	}
+	for j := 0; j < m; j++ {
+		res += int(s2[j])
+	}
+	return res - 2*(memoizeDel(s1, s2, 0, 0, dp))
+
+}
+
+func memoizeDel(t1, t2 string, i, j int, dp [][]int) int {
+	if i == len(t1) || j == len(t2) {
+		return 0
+	}
+	if dp[i][j] != -1 {
+		return dp[i][j]
+	}
+	// chars are same
+	if t1[i] == t2[j] {
+		fmt.Println("tt", int(t1[i]))
+		dp[i][j] = int(t1[i]) + int(t2[j]) + memoizeDel(t1, t2, i+1, j+1, dp)
+		return dp[i][j]
+	}
+
+	// chars are diff
+	dp[i][j] = max(memoizeDel(t1, t2, i+1, j, dp), memoizeDel(t1, t2, i, j+1, dp))
+	return dp[i][j]
 }
